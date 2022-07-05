@@ -17,15 +17,8 @@ public class Juego extends javax.swing.JFrame {
         iniciarJuego();
     }
     
-    /**
-     * Se tiene que llamar al método iniciar partida ubicado en LogicaJuego, pasando por parámetros
-     * la matriz y jPanel4
-     * 
-     * Llamaremos al método para que reinicie todos los botones.
-     */
     public void iniciarJuego(){
          
-        //Llamamos al método iniciarPartida de la clase LogicaJuego y limpiamos los botones
         j.iniciarPartida(matriz, jPanel4);
         clearButtons();
     }
@@ -378,11 +371,6 @@ public class Juego extends javax.swing.JFrame {
         iniciarJuego();
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    /**
-     * Vacía todos los botones
-     * 
-     * ¡¡¡¡No es necesario modificar este método!!!!.
-     */
     private void clearButtons(){
         jButton1.setText("");
         jButton2.setText("");
@@ -396,11 +384,7 @@ public class Juego extends javax.swing.JFrame {
     }
     
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+       
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -417,11 +401,7 @@ public class Juego extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Juego.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        
-        
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Juego().setVisible(true);

@@ -3,7 +3,7 @@ package tresenraya;
 import java.awt.Color;
 
 public class LogicaJuego {
-    int turno, pX, pO; // Turno del jugador
+    int turno, pX, pO;
     boolean habilitado; // Habilita y deshabilita el tablero
 
     /**
@@ -49,13 +49,9 @@ public class LogicaJuego {
     public void setpO(int pO) {
         this.pO = pO;
     }
-    
-    /**
-     * Llamaremos a este método para cambiar de turno
-     */
+
     public void cambioTurno(){
-        
-        //Si el turno actual es 0 lo cambiamos a 1 y viceversa
+
         if (getTurno() == 0) setTurno(1);
         else setTurno(0);
     }
@@ -68,7 +64,6 @@ public class LogicaJuego {
      */
     public int comprobarJuego(int matriz[][]){
         
-        // Comprobar si existe tres en raya
         // Comprobar horizontal
         if((matriz[0][0]==matriz[0][1])&&(matriz[0][1]==matriz[0][2])) return 1;
         if((matriz[1][0]==matriz[1][1])&&(matriz[1][1]==matriz[1][2])) return 1;
@@ -99,20 +94,18 @@ public class LogicaJuego {
      * @return 
      */
     public int tiradaJugador(javax.swing.JButton bt, int x, int y, int matriz[][], javax.swing.JPanel jp, javax.swing.JLabel lX, javax.swing.JLabel lO){
-                
-        // Deshabilita el botón
-        bt.setEnabled(false); //Pasando false a este método deshabilitamos el botón
-        
-        // Insertar la ficha en el botón
-        ponerFicha(matriz, x, y, bt); //Ponemos la ficha
+
+        bt.setEnabled(false);
+
+        ponerFicha(matriz, x, y, bt);
                
         // Comprobar si se ha ganado la partida
-        if(comprobarJuego(matriz)==1){ //Si el método nos devuelve 1 es porque hemos ganado
+        if(comprobarJuego(matriz)==1){
             ganador(lX, lO);
-            habilitado = false; //Deshabilitamos el tablero
-            habilitarTablero(jp); //Llamamos al método que deshabilitará el tablero pasándole el JPanel
+            habilitado = false;
+            habilitarTablero(jp);
             
-        } else cambioTurno(); //En caso de haber perdido cambiamos de turno y el juego continúa
+        } else cambioTurno();
          
          // Deshabilitar tablero
          return 0;
@@ -127,15 +120,13 @@ public class LogicaJuego {
     public void ganador(javax.swing.JLabel lX, javax.swing.JLabel lO){
         
         if(getTurno()==0){
-            //Si el turno es 0 incrementamos la puntuación de X y cambiamos el JLabel
             pX++;
             lX.setText(String.valueOf(pX));
         } else{
-            //Si el turno es 1 incrementamos la puntuación de O y cambiamos el JLabel
             pO++;
             lO.setText(String.valueOf(pO));
         }
-        cambioTurno(); //Cambiamos el turno para la siguiente partida
+        cambioTurno();
     }
     
     /**
@@ -143,10 +134,7 @@ public class LogicaJuego {
      * @param jp  (Panel dónde se sitúa el tablero de juego)
      */
     public void habilitarTablero( javax.swing.JPanel jp){
-        
-        /* Se especifica en el enunciadeo que se deben deshabilitar todos los componentes del JPanel
-         * por lo que recorremos todos los componentes y los deshabilitamos.
-         * De esta forma deshabilitamos los componentes y no el JPanel en sí */
+
         for(int i=0; i<jp.getComponents().length; i++) jp.getComponent(i).setEnabled(habilitado); //si habilitado=false deshabilita
     }
     
@@ -160,8 +148,7 @@ public class LogicaJuego {
      * @param bt (Botón pulsado)
      */
     public void ponerFicha(int matriz[][], int x, int y, javax.swing.JButton bt){
-        
-        //Guardamos el turno en la posición x,y y llamamos a pintarFicha para pintar el botón bt
+
         matriz[x][y] = getTurno();
         
         pintarFicha(bt);        
@@ -173,7 +160,6 @@ public class LogicaJuego {
      */
     private void pintarFicha(javax.swing.JButton bt){
         
-        //Si el turno es 0 pintamos en rojo una X, si no en azul una O
         if(getTurno() == 0){
             
             bt.setForeground(Color.red);
@@ -183,27 +169,19 @@ public class LogicaJuego {
             bt.setForeground(Color.blue);
             bt.setText("O");
         }
-        // Si el turno es de 0 pintará una X en rojo
-
-         // Si el turno es de 1, pintará una O en azul 
-
     }
     
     /**
      * Inicializa una nueva partida, reinicia la matriz (Tablero de juego) y habilita el tablero
      * 
-     * ¡¡¡¡No es necesario modificar este método!!!!.
-     * 
      * @param matriz (Tablero de juego)
      * @param jp (Panel dónde se sitúa el tablero de juego)
      */
     public void iniciarPartida(int matriz[][], javax.swing.JPanel jp){
-        // Rellenamos la matriz por primera vez, evitando que se repitan los números
         for (int x = 0; x < 3; x++)
             for (int y = 0; y < 3; y++) 
                 matriz[x][y]=(x+10)*(y+10);
 
-        // Habilitar tablero
          habilitado = true;
          habilitarTablero(jp);
     }
